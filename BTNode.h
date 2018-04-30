@@ -28,7 +28,60 @@ struct BTNode
 		return os.str();
 	}
 
-	operator<(BTNode<Item_Type>& node);
+	bool operator < (BTNode<Item_Type>& nodeR){
+
+		if (this->morseCode.length() == nodeR.morseCode.length() ) {
+			bool isleft;
+			for (int i = 0; i < this->morseCode.length(); i++ ){
+				if (this->morseCode[i] != nodeR.morseCode[i]){
+					if (this->morseCode[i] == '-'){
+						return false;
+					}
+					else {
+						return true; }
+				}
+			}
+
+		}
+		else if (this->morseCode.length() < nodeR.morseCode.length()){
+			for (int i = 0 ; i < this->morseCode.length(); i++){
+				if (this->morseCode[i] != nodeR.morseCode[i]){
+					if (this->morseCode[i] == '-'){
+						return false;
+					}
+					else {
+						return true; }
+				}
+
+			}
+			if (this->morseCode[0]=='.'){
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else if (this->morseCode.length() > nodeR.morseCode.length()){
+			for (int i = 0 ; i < nodeR.morseCode.length(); i++){
+				if (nodeR.morseCode[i] != this->morseCode[i]){
+					if (nodeR.morseCode[i] == '-'){
+						return false;
+					}
+					else {
+						return true; }
+				}
+
+			}
+			if (nodeR.morseCode[0]=='.'){
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+
+	}
+
 }; // End BTNode
 
 // Overloading the ostream insertion operator
