@@ -56,8 +56,8 @@ public:
 			return local_root->morseCode;
 	}
 
-	std::string encode(std::string input){
-
+	std::string encode(std::string input)
+	{
         //Declare variables
 		std::string morseCodeString = "";
 
@@ -73,5 +73,4 @@ public:
 
 
     }
-
 };
