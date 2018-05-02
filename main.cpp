@@ -1,8 +1,9 @@
 #include "Morse_Code_Tree.h"
 #include <iostream>
 
-int main()
-{
+int main() {
 	Morse_Code_Tree mt("morse.txt");
-	int i;
+
+	std::cout<< mt.encode("ABC");
+	std::cout<< mt.decode(".- -... -.-.");
 }
