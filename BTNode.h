@@ -51,8 +51,19 @@ struct BTNode
 			if (sRhs[0] == '.') false;
 			else return true;
 		}
+		
+		if (sRhs.length() < sLhs.length()) {
+			if (sLhs[sRhs.length()] == '_') return false;
+			else return true;
+		} else if (sLhs.length() < sRhs.length()) {
+			if (sRhs[sLhs.length()] == '_') return true;
+			else return false;
+		} else if (sLhs.length() == sRhs.length()) {
+			if (sLhs[sLhs.length() - 1] == '.' && sRhs[sRhs.length() - 1] == '_') return true;
+			else return false;
+		}
 
-		std::string theShortestString = sRhs.length() < sLhs.length() ? sRhs : sLhs;
+		throw std::runtime_error("I shouldnt be here");
 	}
 }; // End BTNode
 
