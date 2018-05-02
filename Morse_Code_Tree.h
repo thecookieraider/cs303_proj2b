@@ -68,9 +68,8 @@ public:
 
 			//Add value to string and add space between
 			morseCodeString = morseCodeString + " " + value;
-
-			return morseCodeString;
 		}
+		return morseCodeString;
 
 
     }
