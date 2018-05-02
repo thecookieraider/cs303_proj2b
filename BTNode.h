@@ -3,12 +3,45 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
+
+struct MorseCodeString : public std::string
+{
+	MorseCodeString(std::string str) : std::string(str) {}
+
+	bool operator<(MorseCodeString rhs)
+	{
+		MorseCodeString sLhs = *this;
+		MorseCodeString sRhs = rhs;
+
+		if (!sRhs.length()) {
+			if (sLhs[0] == '.') return true;
+			else return false;
+		} else if (!sLhs.length()) {
+			if (sRhs[0] == '.') false;
+			else return true;
+		}
+
+		if (sRhs.length() < sLhs.length()) {
+			if (sLhs[sRhs.length()] == '_') return false;
+			else return true;
+		} else if (sLhs.length() < sRhs.length()) {
+			if (sRhs[sLhs.length()] == '_') return true;
+			else return false;
+		} else if (sLhs.length() == sRhs.length()) {
+			if (sLhs[sLhs.length() - 1] == '.' && sRhs[sRhs.length() - 1] == '_') return true;
+			else return false;
+		}
+
+		throw std::runtime_error("I shouldnt be here");
+	}
+};
+
 /** A node for a Morse code Tree. */
 template <typename T>
 struct BTNode
 {
 	char data;
-	std::string morseCode;
+	MorseCodeString morseCode;
 	BTNode<T> * left;
 	BTNode<T> * right;
 
@@ -26,45 +59,6 @@ struct BTNode
 		return os.str();
 	}
 
-	bool operator<(BTNode<T> rhs) const
-	{
-		/*if (rhs.morseCode.empty()) {
-			if (this->morseCode[0] == '.') return true;
-			else return false;
-		} else if (this->morseCode.empty()) {
-			if (rhs.morseCode[0] == '.') return false;
-			else return true;
-		} else {
-			int rScore = std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '_') - std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '.');
-			int lScore += std::count(this->morseCode.begin(), this->morseCode.end(), '_') - std::count(this->morseCode.begin(), this->morseCode.end(), '.');
-
-			return rScore > lScore;
-		}*/
-
-		std::string sLhs = this->morseCode;
-		std::string sRhs = rhs.morseCode;
-
-		if (!sRhs.length()) {
-			if (sLhs[0] == '.') return true;
-			else return false;
-		} else if (!sLhs.length()) {
-			if (sRhs[0] == '.') false;
-			else return true;
-		}
-		
-		if (sRhs.length() < sLhs.length()) {
-			if (sLhs[sRhs.length()] == '_') return false;
-			else return true;
-		} else if (sLhs.length() < sRhs.length()) {
-			if (sRhs[sLhs.length()] == '_') return true;
-			else return false;
-		} else if (sLhs.length() == sRhs.length()) {
-			if (sLhs[sLhs.length() - 1] == '.' && sRhs[sRhs.length() - 1] == '_') return true;
-			else return false;
-		}
-
-		throw std::runtime_error("I shouldnt be here");
-	}
 }; // End BTNode
 
 // Overloading the ostream insertion operator
