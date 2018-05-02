@@ -7,7 +7,7 @@
 class Morse_Code_Tree : public Binary_Search_Tree<char>
 {
 private:
-	std::map<std::string, char> morseCodes;
+	std::map<char, std::string> morseCodes;
 public:
 	Morse_Code_Tree(std::string fileName)
 	{
