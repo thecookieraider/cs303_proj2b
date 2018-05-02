@@ -58,14 +58,21 @@ public:
 
 	std::string encode(){
 
-        //Get input from user
+        //Get input from user and declare variables
+		std::string morseCodeString = "";
         std::string input;
         cin<<input;
 
-        //Traverse through input
-        for(int i = 0; i<input.length(); i++;){
+        //Traverse through input string
+        for(int i = 0; i<input.length(); i++){
+			//Find letter in key value in map (make sure lowercaase) get value
+			morseCodes.find(input[i].tolower())->value;
 
-        }
+			//Add value to string and add space between
+			morseCodeString = morseCodeString + " " + value;
+
+			return morseCodeString;
+		}
 
 
     }
