@@ -71,6 +71,5 @@ public:
 		}
 		return morseCodeString;
 
-
     }
 };
