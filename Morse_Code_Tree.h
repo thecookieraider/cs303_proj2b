@@ -55,4 +55,9 @@ public:
 		else
 			return local_root->morseCode;
 	}
+
+	std::string encode(){
+
+    }
+
 };
