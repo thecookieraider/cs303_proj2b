@@ -41,32 +41,29 @@ struct BTNode
 			return rScore > lScore;
 		}*/
 
-		int rhsDotCount = std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '.');
-		int rhsDashCount = std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '_');
-		int lhsDotCount = std::count(this->morseCode.begin(), this->morseCode.end(), '.');
-		int lhsDashCount = std::count(this->morseCode.begin(), this->morseCode.end(), '_');
+		std::string sLhs = this->morseCode;
+		std::string sRhs = rhs.morseCode;
 
-		if (!rhs.morseCode.length()) {
-			if (this->morseCode[0] == '.') return true;
+		if (!sRhs.length()) {
+			if (sLhs[0] == '.') return true;
 			else return false;
-		} else if (!this->morseCode.length()) {
-			if (rhs.morseCode[0] == '.') return false;
+		} else if (!sLhs.length()) {
+			if (sRhs[0] == '.') false;
 			else return true;
 		}
-
-		if (rhsDotCount == lhsDotCount) {
-			if (rhsDashCount > lhsDashCount) return true;
-			else return false;
-		} else if (rhsDashCount == rhsDashCount) {
-			if (rhsDotCount > lhsDotCount) return false;
+		
+		if (sRhs.length() < sLhs.length()) {
+			if (sLhs[sRhs.length()] == '_') return false;
 			else return true;
+		} else if (sLhs.length() < sRhs.length()) {
+			if (sRhs[sLhs.length()] == '_') return true;
+			else return false;
+		} else if (sLhs.length() == sRhs.length()) {
+			if (sLhs[sLhs.length() - 1] == '.' && sRhs[sRhs.length() - 1] == '_') return true;
+			else return false;
 		}
 
-		if (rhsDotCount > lhsDotCount && rhsDashCount > lhsDashCount) {
-			return true;
-		} else return false;
-
-		return true;
+		throw std::runtime_error("I shouldnt be here");
 	}
 }; // End BTNode
 
