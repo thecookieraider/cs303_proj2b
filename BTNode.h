@@ -29,9 +29,8 @@ struct BTNode
 	}
 
 	bool operator < (BTNode<Item_Type>& nodeR){
-
 		if (this->morseCode.length() == nodeR.morseCode.length() ) {
-			bool isleft;
+
 			for (int i = 0; i < this->morseCode.length(); i++ ){
 				if (this->morseCode[i] != nodeR.morseCode[i]){
 					if (this->morseCode[i] == '-'){
@@ -47,28 +46,28 @@ struct BTNode
 			for (int i = 0 ; i < this->morseCode.length(); i++){
 				if (this->morseCode[i] != nodeR.morseCode[i]){
 					if (this->morseCode[i] == '-'){
-						return false;
+						return true;
 					}
 					else {
-						return true; }
+						return false; }
 				}
 
 			}
 			if (this->morseCode[0]=='.'){
-				return false;
+				return true;
 			}
 			else {
-				return true;
+				return false;
 			}
 		}
 		else if (this->morseCode.length() > nodeR.morseCode.length()){
 			for (int i = 0 ; i < nodeR.morseCode.length(); i++){
 				if (nodeR.morseCode[i] != this->morseCode[i]){
 					if (nodeR.morseCode[i] == '-'){
-						return false;
+						return true;
 					}
 					else {
-						return true; }
+						return false; }
 				}
 
 			}
