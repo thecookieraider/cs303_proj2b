@@ -24,7 +24,7 @@ public:
 		while (!codes.empty()) {
 			std::sort(codes.begin(), codes.end(), [] (std::string& left, std::string& right) { return left.length() < right.length(); });
 			this->insert(root, codes[0][0], codes[0].substr(1));
-			morseCodes[codes[0].substr(1)] = codes[0][0];
+			morseCodes[codes[0][0]] = codes[0].substr(1);
 			codes.erase(codes.begin());
 		}
 	}
