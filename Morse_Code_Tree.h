@@ -44,7 +44,7 @@ public:
 		}
 	}
 
-	const std::string find(BTNode<char>* local_root, const std::string target) const
+	const BTNode<char>* find(BTNode<char>* local_root, const std::string target) const
 	{
 		if (local_root == NULL)
 			return NULL;
@@ -53,7 +53,7 @@ public:
 		else if (local_root->morseCode < target)
 			return find(local_root->right, target);
 		else
-			return local_root->morseCode;
+			return local_root;
 	}
 
 	std::string encode(std::string input){
@@ -73,5 +73,18 @@ public:
 
 
     }
+	std::string decode(std::string input){
+		//Declare variables
+		std::string Letters = "";
+		size_t pos = 0;
+		std::string token;
+		while ((pos = input.find(" ")) != std::string::npos) {
+			token = input.substr(0, pos);
+			Letters += this->find(root, token)->data;
+			input.erase(0, pos + 1);
+		}
+		return Letters;
+
+	}
 
 };
