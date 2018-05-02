@@ -7,8 +7,8 @@
 struct MorseCodeString : public std::string
 {
 	MorseCodeString(std::string str) : std::string(str) {}
-
-	bool operator<(MorseCodeString rhs)
+	MorseCodeString(const char * str) : std::string(str) {}
+ 	bool operator<(MorseCodeString rhs)
 	{
 		MorseCodeString sLhs = *this;
 		MorseCodeString sRhs = rhs;

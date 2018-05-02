@@ -56,7 +56,7 @@ public:
 			return local_root;
 	}
 
-	std::string encode(std::string input)
+	MorseCodeString encode(MorseCodeString input)
 	{
         //Declare variables
 		std::string morseCodeString = "";
@@ -72,7 +72,7 @@ public:
 		return morseCodeString;
 
     }
-	std::string decode(std::string input) {
+	MorseCodeString decode(MorseCodeString input) {
 		//Declare variables
 		std::string Letters = "" ;
 		size_t pos = 0 ;
@@ -81,7 +81,7 @@ public:
 			token = input.substr(0, pos );
 			Letters += this->find(this->root, token)->data;
 			input.erase(0, pos + 1 );
-		 }
+		}
 		return Letters ;
 
 	 }
