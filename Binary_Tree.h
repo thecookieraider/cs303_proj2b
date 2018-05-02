@@ -82,8 +82,6 @@ public:
 		return pre_order(root);
 	}
 	
-
-	
 	/** Return a post-order traversal of the tree */
 	std::string post_order() const {
 		return post_order(root);

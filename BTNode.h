@@ -2,21 +2,19 @@
 #define BTNODE_H_
 #include <sstream>
 #include <string>
-
-/** A node for a Binary Tree. */
-template<typename Item_Type>
+#include <algorithm>
+/** A node for a Morse code Tree. */
+template <typename T>
 struct BTNode
 {
-	Item_Type data;
+	char data;
 	std::string morseCode;
-	BTNode<Item_Type>* left;
-	BTNode<Item_Type>* right;
+	BTNode<T> * left;
+	BTNode<T> * right;
 
 	// Constructor
-	BTNode(const Item_Type& the_data,
-		BTNode<Item_Type>* left_val = NULL,
-		BTNode<Item_Type>* right_val = NULL) :
-		data(the_data), left(left_val), right(right_val) {}
+	BTNode(const T& the_data, BTNode<T>* left_val = NULL, BTNode<T>* right_val = NULL, std::string morseCode = "") :
+		data(the_data), left(left_val), right(right_val), morseCode(morseCode) {}
 
 	// Destructor (to avoid warning message)
 	virtual ~BTNode() {}
@@ -28,7 +26,44 @@ struct BTNode
 		return os.str();
 	}
 
-	operator<(BTNode<Item_Type>& node);
+	bool operator<(BTNode<T> rhs) const
+	{
+		/*if (rhs.morseCode.empty()) {
+			if (this->morseCode[0] == '.') return true;
+			else return false;
+		} else if (this->morseCode.empty()) {
+			if (rhs.morseCode[0] == '.') return false;
+			else return true;
+		} else {
+			int rScore = std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '_') - std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '.');
+			int lScore += std::count(this->morseCode.begin(), this->morseCode.end(), '_') - std::count(this->morseCode.begin(), this->morseCode.end(), '.');
+
+			return rScore > lScore;
+		}*/
+
+		int rhsDotCount = std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '.');
+		int rhsDashCount = std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '_');
+		int lhsDotCount = std::count(this->morseCode.begin(), this->morseCode.end(), '.');
+		int lhsDashCount = std::count(this->morseCode.begin(), this->morseCode.end(), '_');
+
+		if (!rhs.morseCode.length()) {
+			if (this->morseCode[0] == '.') return true;
+			else return false;
+		} else if (!this->morseCode.length()) {
+			if (rhs.morseCode[0] == '.') return false;
+			else return true;
+		}
+
+		if (rhsDotCount == lhsDotCount) {
+			if (rhsDashCount > lhsDashCount) return true;
+			else return false;
+		} else if (rhsDashCount == rhsDashCount) {
+			if (rhsDotCount > lhsDotCount) return false;
+			else return true;
+		}
+
+		return true;
+	}
 }; // End BTNode
 
 // Overloading the ostream insertion operator
