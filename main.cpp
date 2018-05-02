@@ -3,7 +3,7 @@
 
 int main() {
 	Morse_Code_Tree mt("morse.txt");
+
 	std::cout<< mt.encode("ABC");
 	std::cout<< mt.decode(".- -... -.-.");
-
 }
