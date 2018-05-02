@@ -29,37 +29,37 @@ public:
 		}
 	}
 
-	virtual bool insert(BTNode<char>*& local_root, const char item, const MorseCodeString morseCode)
+	virtual bool insert(BTNode<char>*& local_root, const char item, const std::string morseCode)
 	{
 		if (local_root == NULL) {
 			local_root = new BTNode<char>(item, NULL, NULL, morseCode);
 			return true;
 		} else {
-			if (morseCode < local_root->morseCode)
+			if (BTNode<char>(item, NULL, NULL, morseCode) < *local_root)
 				return insert(local_root->left, item, morseCode);
-	 		else if (local_root->morseCode < morseCode)
+	 		else if (*local_root < BTNode<char>(item, NULL, NULL, morseCode))
 				return insert(local_root->right, item, morseCode);
 			else
 				return false;
 		}
 	}
 
-	const BTNode<char>* find(BTNode<char>* local_root, const MorseCodeString target) const
+	const BTNode<char>* find(BTNode<char>* local_root, const std::string target) const
 	{
 		if (local_root == NULL)
 			return NULL;
-		if (target < local_root->morseCode)
+		if (BTNode<char>(' ', NULL, NULL, target) < *local_root)
 			return find(local_root->left, target);
-		else if (local_root->morseCode < target)
+		else if (*local_root < BTNode<char>(' ', NULL, NULL, target))
 			return find(local_root->right, target);
 		else
 			return local_root;
 	}
 
-	MorseCodeString encode(MorseCodeString input)
+	std::string encode(std::string input)
 	{
         //Declare variables
-		std::string morseCodeString = "";
+		std::string toReturn = "";
 
         //Traverse through input string
         for(size_t i = 0; i<input.length(); i++){
@@ -67,21 +67,25 @@ public:
 			std::string value = morseCodes.find(tolower(input[i]))->second;
 
 			//Add value to string and add space between
-			morseCodeString = morseCodeString + " " + value;
+			toReturn += value + " ";
 		}
-		return morseCodeString;
+		return toReturn;
 
     }
-	MorseCodeString decode(MorseCodeString input) {
+	std::string decode(std::string input) {
 		//Declare variables
 		std::string Letters = "" ;
 		size_t pos = 0 ;
 		std::string token ;
 		while ((pos = input.find(' ')) != std::string::npos ) {
-			token = input.substr(0, pos );
+			token = input.substr(0, pos);
 			Letters += this->find(this->root, token)->data;
-			input.erase(0, pos + 1 );
+			input.erase(0, pos + 1);
 		}
+
+		token = input.substr(0, pos);
+		Letters += this->find(this->root, token)->data;
+
 		return Letters ;
 
 	 }

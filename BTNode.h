@@ -4,14 +4,33 @@
 #include <string>
 #include <algorithm>
 
-struct MorseCodeString : public std::string
+/** A node for a Morse code Tree. */
+template <typename T>
+struct BTNode
 {
-	MorseCodeString(std::string str) : std::string(str) {}
-	MorseCodeString(const char * str) : std::string(str) {}
- 	bool operator<(MorseCodeString rhs)
+	char data;
+	std::string morseCode;
+	BTNode<T> * left;
+	BTNode<T> * right;
+
+	// Constructor
+	BTNode(const T& the_data, BTNode<T>* left_val = NULL, BTNode<T>* right_val = NULL, std::string morseCode = "") :
+		data(the_data), left(left_val), right(right_val), morseCode(morseCode) {}
+
+	// Destructor (to avoid warning message)
+	virtual ~BTNode() {}
+
+	// to_string
+	virtual std::string to_string() const {
+		std::ostringstream os;
+		os << data;
+		return os.str();
+	}
+
+	bool operator<(BTNode<char> rhs)
 	{
-		MorseCodeString sLhs = *this;
-		MorseCodeString sRhs = rhs;
+		std::string sLhs = this->morseCode;
+		std::string sRhs = rhs.morseCode;
 
 		if (!sRhs.length()) {
 			if (sLhs[0] == '.') return true;
@@ -33,30 +52,6 @@ struct MorseCodeString : public std::string
 		}
 
 		throw std::runtime_error("I shouldnt be here");
-	}
-};
-
-/** A node for a Morse code Tree. */
-template <typename T>
-struct BTNode
-{
-	char data;
-	MorseCodeString morseCode;
-	BTNode<T> * left;
-	BTNode<T> * right;
-
-	// Constructor
-	BTNode(const T& the_data, BTNode<T>* left_val = NULL, BTNode<T>* right_val = NULL, std::string morseCode = "") :
-		data(the_data), left(left_val), right(right_val), morseCode(morseCode) {}
-
-	// Destructor (to avoid warning message)
-	virtual ~BTNode() {}
-
-	// to_string
-	virtual std::string to_string() const {
-		std::ostringstream os;
-		os << data;
-		return os.str();
 	}
 
 }; // End BTNode
