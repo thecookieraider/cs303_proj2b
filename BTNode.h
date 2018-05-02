@@ -62,6 +62,10 @@ struct BTNode
 			else return true;
 		}
 
+		if (rhsDotCount > lhsDotCount && rhsDashCount > lhsDashCount) {
+			return true;
+		} else return false;
+
 		return true;
 	}
 }; // End BTNode
