@@ -58,6 +58,16 @@ public:
 
 	std::string encode(){
 
+        //Get input from user
+        std::string input;
+        cin<<input;
+
+        //Traverse through input
+        for(int i = 0; i<input.length(); i++;){
+
+        }
+
+
     }
 
 };
