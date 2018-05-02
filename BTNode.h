@@ -41,32 +41,18 @@ struct BTNode
 			return rScore > lScore;
 		}*/
 
-		int rhsDotCount = std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '.');
-		int rhsDashCount = std::count(rhs.morseCode.begin(), rhs.morseCode.end(), '_');
-		int lhsDotCount = std::count(this->morseCode.begin(), this->morseCode.end(), '.');
-		int lhsDashCount = std::count(this->morseCode.begin(), this->morseCode.end(), '_');
+		std::string sLhs = this->morseCode;
+		std::string sRhs = rhs.morseCode;
 
-		if (!rhs.morseCode.length()) {
-			if (this->morseCode[0] == '.') return true;
+		if (!sRhs.length()) {
+			if (sLhs[0] == '.') return true;
 			else return false;
-		} else if (!this->morseCode.length()) {
-			if (rhs.morseCode[0] == '.') return false;
+		} else if (!sLhs.length()) {
+			if (sRhs[0] == '.') false;
 			else return true;
 		}
 
-		if (rhsDotCount == lhsDotCount) {
-			if (rhsDashCount > lhsDashCount) return true;
-			else return false;
-		} else if (rhsDashCount == rhsDashCount) {
-			if (rhsDotCount > lhsDotCount) return false;
-			else return true;
-		}
-
-		if (rhsDotCount > lhsDotCount && rhsDashCount > lhsDashCount) {
-			return true;
-		} else return false;
-
-		return true;
+		std::string theShortestString = sRhs.length() < sLhs.length() ? sRhs : sLhs;
 	}
 }; // End BTNode
 

@@ -56,7 +56,7 @@ public:
 			return local_root->morseCode;
 	}
 
-	std::string encode(std::string inout){
+	std::string encode(std::string input){
 
         //Declare variables
 		std::string morseCodeString = "";
@@ -64,7 +64,7 @@ public:
         //Traverse through input string
         for(int i = 0; i<input.length(); i++){
 			//Find letter in key value in map (make sure lowercaase) get value
-			morseCodes.find(input[i].tolower())->value;
+			std::string value = morseCodes.find(tolower(input[i]))->second;
 
 			//Add value to string and add space between
 			morseCodeString = morseCodeString + " " + value;
