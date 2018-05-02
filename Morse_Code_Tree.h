@@ -56,12 +56,10 @@ public:
 			return local_root->morseCode;
 	}
 
-	std::string encode(){
+	std::string encode(std::string inout){
 
-        //Get input from user and declare variables
+        //Declare variables
 		std::string morseCodeString = "";
-        std::string input;
-        cin<<input;
 
         //Traverse through input string
         for(int i = 0; i<input.length(); i++){
