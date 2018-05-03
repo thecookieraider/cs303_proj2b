@@ -2,6 +2,7 @@
 #include <iostream>
 
 int main() {
+	//Simple test cases.
 	Morse_Code_Tree mt("morse.txt");
 
 	std::cout<< mt.encode("ABC");
